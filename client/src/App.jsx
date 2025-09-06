@@ -6,7 +6,7 @@ import EmailVerify from './pages/EmailVerify'
 import ResetPassword from './pages/ResetPassword'
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import MouseFollower from './components/Mousefollower'
+import MouseFollower from './components/MouseFollower'
 import Loader from './components/Loader'
 
 import RoleSelect from './pages/RoleSelect'
