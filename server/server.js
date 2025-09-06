@@ -20,14 +20,14 @@ connectDB();
 // Socket.io setup
 const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: ['http://localhost:5173', 'https://codecrew-mindsprint-frontend.onrender.com'],
     methods: ['GET', 'POST'],
     credentials: true
   },
   allowEIO3: true
 });
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['http://localhost:5173', 'https://codecrew-mindsprint-frontend.onrender.com']
 
 // Parse incoming JSON requests and put the parsed data in req.body
 app.use(express.json());
