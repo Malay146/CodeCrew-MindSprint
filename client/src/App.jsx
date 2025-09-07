@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import EmailVerify from './pages/EmailVerify'
-import ResetPassword from './pages/ResetPassword'
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-import MouseFollower from './components/MouseFollower'
-import Loader from './components/Loader'
-
-import RoleSelect from './pages/RoleSelect'
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import EmailVerify from "./pages/EmailVerify";
+import ResetPassword from "./pages/ResetPassword";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import MouseFollower from "./components/MouseFollower";
+import Loader from "./components/Loader";
+import RoleSelect from "./pages/RoleSelect";
+import Lenis from "lenis";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -31,13 +31,24 @@ const App = () => {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+
+      // Initialize Lenis
+      const lenis = new Lenis();
+
+      // Use requestAnimationFrame to continuously update the scroll
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
     }
   }, [loading]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -69,20 +80,23 @@ const App = () => {
           <Route path='/email-verify' element={<EmailVerify />} />
           <Route path='/reset-password' element={<ResetPassword />} />
         </Routes> */}
-        <ToastContainer position="top-right" autoClose={3000} /> {/* ✅ outside Routes */}
-      
-         <Routes>
-           <Route path='/' element={<Home scrollToSection={scrollToSection} />} />
-           <Route path='/login' element={<RoleSelect />} />
-           <Route path='/auth' element={<Login />} />
-           <Route path='/email-verify' element={<EmailVerify />} />
-           <Route path='/reset-password' element={<ResetPassword />} />
-         </Routes>
+        <ToastContainer position="top-right" autoClose={3000} />{" "}
+        {/* ✅ outside Routes */}
+        <Routes>
+          <Route
+            path="/"
+            element={<Home scrollToSection={scrollToSection} />}
+          />
+          <Route path="/login" element={<RoleSelect />} />
+          <Route path="/auth" element={<Login />} />
+          <Route path="/email-verify" element={<EmailVerify />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Routes>
       </div>
     </>
     // <div>
     //   <ToastContainer position="top-right" autoClose={3000} /> {/* ✅ outside Routes */}
-      
+
     //   <Routes>
     //     <Route path='/' element={<Home />} />
     //     <Route path='/login' element={<RoleSelect />} />
@@ -96,7 +110,7 @@ const App = () => {
     //     <Route path='/profile-settings' element={<ProfileSettings />} />
     //   </Routes>
     // </div>
-  )
-}
+  );
+};
 
 export default App;
